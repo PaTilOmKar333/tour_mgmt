@@ -1,0 +1,65 @@
+CREATE TABLE Users ( 
+  ID SERIAL PRIMARY KEY,
+  FirstName VARCHAR(255) NOT NULL,
+  LastName VARCHAR(255) NOT NULL,
+  Email VARCHAR(255) UNIQUE NOT NULL,
+  Password VARCHAR(255) NOT NULL,
+  PhoneNumber VARCHAR(20) NOT NULL,
+  Address VARCHAR(255) NOT NULL
+);
+
+SELECT SETVAL('User_ID_seq', 2000);
+
+CREATE TABLE TourPackage (
+  ID SERIAL PRIMARY KEY,
+  Package_name VARCHAR(255) NOT NULL,
+  Destination VARCHAR(255) NOT NULL,
+  Description TEXT NOT NULL,
+  Price_per_person DECIMAL(10, 2) NOT NULL,
+  Duration INT NOT NULL,
+  Available_seats INT NOT NULL
+);
+
+
+CREATE TABLE Booking (
+  ID SERIAL PRIMARY KEY,
+  User_ID INT NOT NULL,
+  Tour_package_ID INT NOT NULL,
+  Booking_date DATE NOT NULL,
+  Number_of_persons INT NOT NULL,
+  Total_price DECIMAL(10, 2) NOT NULL,
+  FOREIGN KEY (User_ID) REFERENCES Users(ID),
+  FOREIGN KEY (Tour_package_ID) REFERENCES TourPackage(ID)
+);
+
+CREATE TABLE Payment (
+  ID SERIAL PRIMARY KEY,
+  Booking_ID INT NOT NULL,
+  Payment_date DATE NOT NULL,
+  Payment_method VARCHAR(255) NOT NULL,
+  Amount DECIMAL(10, 2) NOT NULL,
+  FOREIGN KEY (Booking_ID) REFERENCES Booking(ID)
+);
+
+CREATE TABLE Review (
+  ID SERIAL PRIMARY KEY,
+  User_ID INT NOT NULL,
+  Tour_package_ID INT NOT NULL,
+  Rating INT NOT NULL,
+  Review_text TEXT NOT NULL,
+  Review_date DATE NOT NULL,
+  FOREIGN KEY (User_ID) REFERENCES Users(ID),
+  FOREIGN KEY (Tour_package_ID) REFERENCES TourPackage(ID)
+);
+
+CREATE TABLE TourGuide (
+  ID SERIAL PRIMARY KEY,
+  FirstName VARCHAR(255) NOT NULL,
+  LastName VARCHAR(255) NOT NULL,
+  Email VARCHAR(255) UNIQUE NOT NULL,
+  PhoneNumber VARCHAR(20) NOT NULL,
+  Address VARCHAR(255) NOT NULL,
+  Tour_package_ID INT NOT NULL,
+  FOREIGN KEY (Tour_package_ID) REFERENCES TourPackage(ID)
+);
+

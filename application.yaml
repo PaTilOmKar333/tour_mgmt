@@ -1,0 +1,11 @@
+APP_NAME: "server"
+APP_PORT: "8000"
+
+DB_DRIVER: "postgres"
+DB_HOST: "localhost"
+DB_PORT: 5432
+DB_NAME: "tour_management"
+DB_USER: "postgres"
+DB_PASSWORD: "postgres"
+SECRETKEY: "qwertiuyt"
+
