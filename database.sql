@@ -8,6 +8,8 @@ CREATE TABLE Users (
   Address VARCHAR(255) NOT NULL
 );
 
+CREATE SEQUENCE User_ID_seq START 2000;
+
 SELECT SETVAL('User_ID_seq', 2000);
 
 CREATE TABLE TourPackage (
